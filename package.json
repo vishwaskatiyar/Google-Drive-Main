@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm install --legacy-peer-deps && vercel build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -17,7 +17,7 @@
     "@mui/icons-material": "^5.15.19",
     "firebase": "^8.8.1",
     "firebase-tools": "^13.11.2",
-    "react": "^18.2.0",
+    "react": "^17.0.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
