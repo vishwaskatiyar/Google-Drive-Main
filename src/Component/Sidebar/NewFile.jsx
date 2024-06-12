@@ -1,11 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import firebase from "firebase";
 import { storage, db, auth } from "../../../firebase";
 import Modal from "@mui/material/Modal";
 import LinearProgress from "@mui/material/LinearProgress";
 
-const useStyles = () => ({
+// useStyles should return an object, not a function
+const useStyles = {
   paper: {
     position: "absolute",
     width: 400,
@@ -13,15 +14,13 @@ const useStyles = () => ({
     border: "2px solid #000",
     boxShadow: "5px 5px 15px rgba(0, 0, 0, 0.1)",
     padding: "2rem",
-  },
-});
-
-const NewFile = () => {
-  const [modalStyle] = useState({
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-  });
+  },
+};
+
+const NewFile = () => {
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -89,16 +88,16 @@ const NewFile = () => {
     );
   };
 
-  const classes = useStyles();
-
   return (
-    <div className="newFile p-2 ml-2 bg-gray-100 rounded-full mt-5 border border-sky-200 hover:bg-sky-200 shadow-md relative">
+    <div>
       <div
-        className="newFile__container flex items-center cursor-pointer"
+        className="newFile p-2 ml-2 bg-gray-100 rounded-full mt-5 border border-sky-200 hover:bg-sky-200 shadow-md relative"
         onClick={handleOpen}
       >
-        <AddIcon fontSize="large" className="text-blue-500" />
-        <p className="ml-2 text-lg font-semibold text-blue-500">New</p>
+        <div className="newFile__container flex items-center cursor-pointer">
+          <AddIcon fontSize="large" className="text-blue-500" />
+          <p className="ml-2 text-lg font-semibold text-blue-500">New</p>
+        </div>
       </div>
 
       <Modal
@@ -107,7 +106,7 @@ const NewFile = () => {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <div style={modalStyle} className={classes.paper}>
+        <div style={useStyles.paper}>
           <p className="text-lg font-medium mb-4">Select a file to upload:</p>
           {uploading && <LinearProgress value={uploadProgress} />}
           {error && <p className="text-red-500 mb-4">{error}</p>}
