@@ -1,5 +1,5 @@
-import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
-import GetAppIcon from "@material-ui/icons/GetApp";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import GetAppIcon from "@mui/icons-material/GetApp";
 import PropTypes from "prop-types";
 
 const monthNames = [
@@ -19,12 +19,12 @@ const monthNames = [
 
 const FileItem = ({ caption, timestamp, fileUrl, size }) => {
   const fileDate = `${timestamp?.toDate().getDate()} ${
-    monthNames[timestamp?.toDate().getMonth() + 1]
+    monthNames[timestamp?.toDate().getMonth()]
   } ${timestamp?.toDate().getFullYear()}`;
 
   const getReadableFileSizeString = (fileSizeInBytes) => {
     let i = -1;
-    const byteUnits = [" kB", "B", "B", "B", "PB", "EB", "ZB", "YB"];
+    const byteUnits = [" kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     do {
       fileSizeInBytes = fileSizeInBytes / 1024;
       i++;
@@ -52,11 +52,15 @@ const FileItem = ({ caption, timestamp, fileUrl, size }) => {
         className="flex w-full items-center no-underline"
       >
         <div className="fileItem--left flex items-center">
-          <InsertDriveFileIcon className="text-blue-500 mr-2" />
+          <InsertDriveFileIcon
+            sx={{ color: "blue" }}
+            className="text-blue-500 mr-2"
+          />
           <p className="text-gray-700">{caption}</p>
         </div>
         <div className="fileView__titles--right flex-1 flex justify-end space-x-16">
           <GetAppIcon
+            sx={{ color: "blue", cursor: "pointer" }}
             className="text-blue-500 cursor-pointer"
             onClick={handleDownload}
           />
